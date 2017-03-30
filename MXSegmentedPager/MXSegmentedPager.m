@@ -97,6 +97,10 @@
         [self reloadData];
     }
     
+    if ([self.delegate respondsToSelector:@selector(heightForSegmentedControlInSegmentedPager:)]) {
+        _controlHeight = [self.delegate heightForSegmentedControlInSegmentedPager:self];
+    }
+    
     [self layoutContentView];
     [self layoutSegmentedControl];
     [self layoutPager];
@@ -138,13 +142,14 @@
     frame.origin = CGPointZero;
     
     if (self.segmentedControlPosition == MXSegmentedControlPositionTop) {
-//        frame.origin.y  = _controlHeight;
-        frame.origin.y = CGRectGetHeight([self.segmentedControl getScrollViewFrame]);
+        frame.origin.y  = _controlHeight;
+//        frame.origin.y = CGRectGetHeight([self.segmentedControl getScrollViewFrame]);
         frame.origin.y += self.segmentedControlEdgeInsets.top;
         frame.origin.y += self.segmentedControlEdgeInsets.bottom;
     }
     
     frame.size.height -= _controlHeight;
+//    frame.size.height -= CGRectGetHeight([self.segmentedControl getScrollViewFrame]);
     frame.size.height -= self.segmentedControlEdgeInsets.top;
     frame.size.height -= self.segmentedControlEdgeInsets.bottom;
     frame.size.height -= self.contentView.parallaxHeader.minimumHeight;
