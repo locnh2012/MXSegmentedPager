@@ -138,7 +138,8 @@
     frame.origin = CGPointZero;
     
     if (self.segmentedControlPosition == MXSegmentedControlPositionTop) {
-        frame.origin.y  = _controlHeight;
+//        frame.origin.y  = _controlHeight;
+        frame.origin.y = CGRectGetHeight([self.segmentedControl getScrollViewFrame]);
         frame.origin.y += self.segmentedControlEdgeInsets.top;
         frame.origin.y += self.segmentedControlEdgeInsets.bottom;
     }
